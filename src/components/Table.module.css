@@ -1,0 +1,99 @@
+.container {
+  margin: 24px 48px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  text-align: left;
+}
+
+.table thead tr {
+  background-color: #009879;
+  color: #fff;
+  font-weight: bold;
+}
+
+.table th,
+.table td {
+  padding: 12px 15px;
+}
+
+.table tbody tr {
+  border-bottom: 1px solid lightgray;
+}
+
+.table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.table tbody tr:last-child {
+  border-bottom: 2px solid #009879;
+}
+
+.table tbody tr:hover {
+  color: #009879;
+  cursor: pointer;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* for smaller screens */
+@media (max-width: 750px) {
+  .container {
+    margin: 8px 16px;
+  }
+
+  /* hiding head */
+  .table thead {
+    display: none;
+  }
+
+  /* converting to card */
+  .table tr {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 0px;
+  }
+
+  .table td {
+    padding: 0px 16px;
+  }
+
+  .table td:not(:nth-child(1):nth-child(2)) {
+    display: flex;
+  }
+
+  .table td *:nth-child(2) {
+    flex: 3;
+  }
+
+  /* adding content to the td */
+  .table td:nth-child(2)::before {
+    content: "Id: ";
+    min-width: 100px;
+  }
+
+  .table td:nth-child(3)::before {
+    content: "First Name: ";
+    min-width: 100px;
+  }
+
+  .table td:nth-child(4)::before {
+    content: "Last Name: ";
+    min-width: 100px;
+  }
+
+  .table td:nth-child(5)::before {
+    content: "Email: ";
+    min-width: 100px;
+  }
+}

@@ -1,0 +1,37 @@
+/* main alert component */
+.alert {
+  max-width: 250px;
+  max-height: 200px;
+  overflow: hidden;
+  padding: 12px 48px 12px 12px;
+  font-weight: bold;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* alert variants */
+.alert.success {
+  background-color: #4caf50;
+}
+
+.alert.error {
+  background-color: #f44336;
+}
+
+.alert .closeButton {
+  position: absolute;
+  right: 12px;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.alert,
+.alert .closeButton {
+  color: #fff;
+}
