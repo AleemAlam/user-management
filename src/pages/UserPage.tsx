@@ -24,6 +24,7 @@ export default function UserPage() {
           setUser(data.data);
         }
       } catch (err) {
+        // Navigate to 404 if got wrong user id
         navigate("/404");
       } finally {
         setLoading(false);
@@ -31,17 +32,6 @@ export default function UserPage() {
     },
     [navigate]
   );
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    if (user) {
-      const payload = {
-        ...user,
-        [name]: value,
-      };
-      setUser(payload);
-    }
-  };
 
   const handleEdit = async () => {
     if (editable && userId && user) {
@@ -72,7 +62,6 @@ export default function UserPage() {
       showAlert={showAlert}
       userId={user.id}
       editable={editable}
-      handleChange={handleChange}
       handleEdit={handleEdit}
       handleCancel={() => setEditable(false)}
     />
