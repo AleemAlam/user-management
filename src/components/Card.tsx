@@ -15,7 +15,7 @@ type Props = {
   showAlert: AlertVariant | null;
   userId: string;
   editable: boolean;
-  handleEdit: VoidFunction;
+  handleEdit: (url: string) => void;
   handleCancel: VoidFunction;
 };
 
@@ -28,6 +28,15 @@ export default function Card({
   handleCancel,
 }: Props) {
   const [input, setInput] = useState(user);
+  const [previewImg, setPreviewImg] = useState<string>(user.avatar);
+
+  const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
+    // currently converting img to blob for preview
+    if (e.target.files?.[0]) {
+      const blobImg = URL.createObjectURL(e.target.files[0]);
+      setPreviewImg(blobImg);
+    }
+  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -51,10 +60,18 @@ export default function Card({
         )}
         <Link to="/">Go back to Users</Link>
         <div>
-          <img src={input.avatar} alt="" />
+          <img src={previewImg} alt="img" width="125px" height="125px" />
         </div>
         <h3>Id: {userId}</h3>
         <form>
+          {editable && (
+            <input
+              type="file"
+              multiple={false}
+              onChange={handleImage}
+              accept="image/*"
+            />
+          )}
           <div className={styles.row}>
             <label>First Name:</label>
             <input
@@ -93,12 +110,13 @@ export default function Card({
               onClick={() => {
                 handleCancel();
                 setInput(user);
+                setPreviewImg(user.avatar);
               }}
             >
               Cancel
             </button>
           )}
-          <button className="primary" onClick={handleEdit}>
+          <button className="primary" onClick={() => handleEdit(previewImg)}>
             {editable ? "Update" : "Edit"}
           </button>
         </div>

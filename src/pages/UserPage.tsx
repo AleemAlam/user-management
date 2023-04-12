@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getSingleUser, updateUser } from "../network/request";
 import { User } from "./UserListPage";
@@ -33,11 +33,12 @@ export default function UserPage() {
     [navigate]
   );
 
-  const handleEdit = async () => {
+  const handleEdit = async (url: string) => {
+    // instead of blob should upload to some S3 or cloud but for test purpose using blob
     if (editable && userId && user) {
       try {
         setLoading(true);
-        await updateUser(user, userId);
+        await updateUser({ ...user, avatar: url }, userId);
         setEditable(false);
         setShowAlert(AlertVariant.success);
       } catch (err) {
